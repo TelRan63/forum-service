@@ -26,7 +26,15 @@ export const updateUser = async (login, updateData) => {
 }
 
 export const changeRoles = async (login, role, isAddRole) => {
-    // TODO: Implement user role change logic
+    role = role.toUpperCase();
+    let userAccount;
+    if (isAddRole) {
+        userAccount = await userAccountRepository.addRole(login, role);
+    } else {
+        userAccount = await userAccountRepository.removeRole(login, role);
+    }
+    // TODO: Complete to implement user role change logic
+
 }
 
 export const changePassword = async (login, newPassword) => {
@@ -34,5 +42,9 @@ export const changePassword = async (login, newPassword) => {
 }
 
 export const getUser = async (login) => {
-    // TODO: Implement user retrieval logic
+    const userAccount = await userAccountRepository.findUser(login);
+    if (!userAccount) {
+        throw new Error(`User with login '${login}' not found`);
+    }
+    return userAccount;
 }
