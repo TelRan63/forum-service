@@ -1,4 +1,4 @@
-import * as postRepository from '../repository/post.repository.js';
+import * as postRepository from '../repositories/post.repository.js';
 
 export const createPost = async (author, data) => {
     const tags = [...new Set(data.tags)];

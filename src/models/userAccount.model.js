@@ -30,6 +30,7 @@ const userAccountSchema = new Schema({
         transform: (doc, ret) => {
             ret.login = doc._id;
             delete ret._id;
+            delete ret.password;
         }
     }
 })
