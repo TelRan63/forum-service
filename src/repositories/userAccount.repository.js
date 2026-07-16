@@ -1,6 +1,9 @@
 import UserAccount from '../models/userAccount.model.js';
 
-export const addUser = async (user) => UserAccount.create(user);
+export const addUser = async (user) => {
+    const useAccount = new UserAccount(user);
+    return useAccount.save();
+}
 
 export const removeUser = async (login) => UserAccount.findByIdAndDelete(login, {returnDocument: 'after'}).exec();
 
