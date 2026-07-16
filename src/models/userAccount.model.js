@@ -11,7 +11,7 @@ const userAccountSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false
+
     },
     firstName: {
         type: String,
@@ -40,5 +40,9 @@ userAccountSchema.pre('save', async function () {
     const salt = await bcrypt.genSalt(12);
     this.password = await bcrypt.hash(this.password, salt);
 })
+
+userAccountSchema.methods.comparePassword = async function (plainTextPassword) {
+    return bcrypt.compare(plainTextPassword, this.password);
+}
 
 export default model('UserAccount', userAccountSchema, 'users');
