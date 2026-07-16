@@ -8,10 +8,6 @@ export const updateUser = async (login, updateData) => UserAccount.findByIdAndUp
 
 export const findUser = async (login) => UserAccount.findById(login).exec();
 
-export const addRole = async (login, role) => {
-    // TODO: Implement role addition logic
-}
+export const addRole = async (login, role) => UserAccount.findByIdAndUpdate(login,{$addToSet: {roles: role}}, {returnDocument: 'after'}).select({roles: 1, login: 1}).exec();
 
-export const removeRole = async (login, role) => {
-    // TODO: Implement role addition logic
-}
+export const removeRole = async (login, role) => UserAccount.findByIdAndUpdate(login,{$pull: {roles: role}}, {returnDocument: 'after'}).select('-firstName -lastName').exec();

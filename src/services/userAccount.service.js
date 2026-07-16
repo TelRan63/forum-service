@@ -33,7 +33,10 @@ export const changeRoles = async (login, role, isAddRole) => {
     } else {
         userAccount = await userAccountRepository.removeRole(login, role);
     }
-    // TODO: Complete to implement user role change logic
+    if (!userAccount) {
+        throw new Error(`User with login '${login}' not found`);
+    }
+    return userAccount;
 
 }
 
