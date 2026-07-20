@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express from 'express';
 import config from './configuration/config.js';
 import mongoose from "mongoose";
 import postRoutes from './routes/post.routes.js';
@@ -14,9 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(authentication);
 
-const authorizationRouter = Router();
-authorizationRouter.all('/account/user/:login/role/:role', hasRole(ADMIN));
-app.use(authorizationRouter);
+app.use('/account/user/:login/role/:role', hasRole(ADMIN));
 
 app.use('/forum', postRoutes);
 app.use('/account', userRoutes);
