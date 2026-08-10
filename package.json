@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "forum web service\"",
   "scripts": {
-    "start": "node --env-file=.env src/server.js",
+    "start": "node src/server.js",
     "dev": "node --watch --env-file=.env src/server.js",
     "test": "node --env-file=.env --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
